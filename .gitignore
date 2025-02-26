@@ -1,0 +1,47 @@
+# Compiled output
+/dist
+/build
+
+# Dependencies
+/node_modules
+
+# Environment files
+.env
+.env.*.local
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+/logs
+*.log
+
+# IDE and OS files
+.idea
+.vscode
+*.swp
+*~
+Thumbs.db
+.DS_Store
+
+# Coverage reports
+/coverage
+
+# Optional: Docker
+/docker-compose.yml
+/Dockerfile
+
+# Optional: npm debug log
+npm-debug.log*
+
+# Optional: Yarn files
+yarn-error.log
+.pnp.*
+
+# Optional: Package lock files (if you don't want to track changes)
+# package-lock.json
+# yarn.lock
+
+# Optional: Temporary files
+/tmp
