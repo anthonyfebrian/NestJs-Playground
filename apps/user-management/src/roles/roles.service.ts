@@ -16,6 +16,5 @@ export class RolesService {
 
     findOne(id: number) {
         return this.repository.findOneBy({ id })
-
     }
 }
