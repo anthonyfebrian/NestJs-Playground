@@ -12,7 +12,7 @@ export class UserManagementController {
   }
 
   @MessagePattern('helloUserManagement')
-  getRoles() {
+  helloUserManagement() {
     const message = 'Hello user management from microservices 2"'
     console.log(message)
     return message;
