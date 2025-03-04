@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { RolesModule } from './roles/roles.module';
 import { AuthModule } from './auth/auth.module';
+import { RolesModule } from './roles/roles.module';
 import { UsersModule } from './users/users.module';
 
 @Module({
-  imports: [RolesModule, AuthModule, UsersModule]
+  imports: [AuthModule, RolesModule, UsersModule]
 })
 export class UserManagementModule {}
