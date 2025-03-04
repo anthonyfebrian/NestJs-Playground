@@ -9,4 +9,9 @@ export class ApiGatewayController {
   getHello(): string {
     return this.apiGatewayService.getHello();
   }
+
+  @Get('/user-management')
+  getUserManagementHello() {
+    return this.apiGatewayService.getUserManagementHello();
+  }
 }
