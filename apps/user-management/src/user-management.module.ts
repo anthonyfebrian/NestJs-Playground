@@ -6,6 +6,7 @@ import { RolesModule } from './roles/roles.module';
 import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Role } from './roles/entities/role.entity';
+import { User } from './users/entities/user.entity';
 
 @Module({
   imports: [
@@ -19,7 +20,7 @@ import { Role } from './roles/entities/role.entity';
       username: '',
       password: '',
       database: 'nest_playground',
-      entities: [Role],
+      entities: [User, Role],
       synchronize: true,
     })
    ],
