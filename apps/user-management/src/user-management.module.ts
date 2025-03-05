@@ -7,9 +7,11 @@ import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Role } from './roles/entities/role.entity';
 import { User } from './users/entities/user.entity';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     AuthModule,
     RolesModule,
     UsersModule,

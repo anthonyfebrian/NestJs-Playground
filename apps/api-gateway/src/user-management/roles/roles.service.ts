@@ -5,7 +5,7 @@ import { ClientProxy } from '@nestjs/microservices';
 export class RolesService {
 
     constructor(
-        @Inject('USER_MANAGEMENT_SERVICE') private readonly client: ClientProxy
+        @Inject(`${process.env.USER_MANAGEMENT_SERVICE}`) private readonly client: ClientProxy
     ) { }
 
     async findAll() {
