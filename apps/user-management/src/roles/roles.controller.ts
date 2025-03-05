@@ -10,7 +10,7 @@ export class RolesController {
 
     @MessagePattern(ROLE_PATTERNS.FIND_ALL)
     findAll() {
-        console.log('Microservices: This action returns all roles');
+        console.log('Microservices: This action returns all roles' + ROLE_PATTERNS.FIND_ALL);
         return this.service.findAll();
     }
 
