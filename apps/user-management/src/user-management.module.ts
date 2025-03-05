@@ -17,16 +17,16 @@ import { ConfigModule } from '@nestjs/config';
     UsersModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: '',
-      password: '',
-      database: 'nest_playground',
+      host: `${process.env.USER_MANAGEMENT_HOST}`,
+      port: parseInt(`${process.env.USER_MANAGEMENT_PORT}`),
+      username: `${process.env.USER_MANAGEMENT_USERNAME}`,
+      password: `${process.env.USER_MANAGEMENT_PASSWORD}`,
+      database: `${process.env.USER_MANAGEMENT_DATABASE}`,
       entities: [User, Role],
       synchronize: false,
     })
-   ],
+  ],
   controllers: [UserManagementController],
   providers: [UserManagementService],
 })
-export class UserManagementModule {}
+export class UserManagementModule { }
