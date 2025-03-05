@@ -6,7 +6,7 @@ export class User {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column()
+    @Column({ unique: true })
     email: string
 
     @Column()
@@ -18,7 +18,7 @@ export class User {
     @Column({ name: 'last_name' })
     lastName: string
 
-    @ManyToOne(() => Role)
+    @ManyToOne(() => Role, { eager: true })
     @JoinColumn({ name: 'role_id' })
     role: Role
 }

@@ -9,7 +9,6 @@ export class RolesService {
     ) { }
 
     async findAll() {
-        // return this.client.send('helloUserManagement', {})
         return this.client.send('getRoles', {})
     }
 
