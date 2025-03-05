@@ -1,3 +1,4 @@
+import { ROLE_PATTERNS } from '@app/shared/user-management/roles/roles.patterns';
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 
@@ -9,11 +10,11 @@ export class RolesService {
     ) { }
 
     async findAll() {
-        return this.client.send('getRoles', {})
+        return this.client.send(ROLE_PATTERNS.FIND_ALL, {})
     }
 
     findOne(id: number) {
-        return this.client.send('findOneRole', id)
+        return this.client.send(ROLE_PATTERNS.FIND_ONE, id)
     }
 }
 
