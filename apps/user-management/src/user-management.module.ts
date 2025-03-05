@@ -21,7 +21,7 @@ import { User } from './users/entities/user.entity';
       password: '',
       database: 'nest_playground',
       entities: [User, Role],
-      synchronize: true,
+      synchronize: false,
     })
    ],
   controllers: [UserManagementController],
