@@ -1,4 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
+import { Cron, CronExpression } from '@nestjs/schedule';
 
 @Injectable()
 export class ApiGatewayService {
@@ -10,5 +11,10 @@ export class ApiGatewayService {
 
   async getUserManagementHello() {
     return "Hello from User Management Service";
+  }
+
+  @Cron(CronExpression.EVERY_30_SECONDS)
+  async handleCronJob() {
+    console.log('Cron job is running every 30 seconds now :' + new Date());
   }
 }

@@ -5,10 +5,12 @@ import { ConfigModule } from '@nestjs/config';
 
 import { UserManagementModule } from './user-management/user-management.module';
 import { ClientModule } from './user-management/shared/client/client.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
+    ScheduleModule.forRoot(),
     ClientModule,
     UserManagementModule
   ],
