@@ -1,8 +1,10 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, Logger } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 
 @Injectable()
 export class ApiGatewayService {
+  private readonly logger = new Logger(ApiGatewayService.name);
+
   constructor() {}
 
   getHello(): string {
@@ -15,6 +17,6 @@ export class ApiGatewayService {
 
   @Cron(CronExpression.EVERY_30_SECONDS)
   async handleCronJob() {
-    console.log('Cron job is running every 30 seconds now :' + new Date());
+    this.logger.debug(`Cron job is running every 30 seconds now :` + new Date());
   }
 }
