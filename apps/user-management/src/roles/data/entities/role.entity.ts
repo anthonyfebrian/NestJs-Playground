@@ -1,10 +1,10 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity()
-export class Role {
+@Entity("role")
+export class RoleEntity {
     @PrimaryGeneratedColumn()
-    id:number
+    id: number
 
     @Column()
-    name:string
+    name: string
 }

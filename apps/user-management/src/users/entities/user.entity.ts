@@ -1,5 +1,5 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Role } from "../../roles/entities/role.entity";
+import { RoleEntity } from "../../roles/data/entities/role.entity";
 
 @Entity('users')
 export class User {
@@ -18,7 +18,7 @@ export class User {
     @Column({ name: 'last_name' })
     lastName: string
 
-    @ManyToOne(() => Role, { eager: true })
+    @ManyToOne(() => RoleEntity, { eager: true })
     @JoinColumn({ name: 'role_id' })
-    role: Role
+    role: RoleEntity
 }
