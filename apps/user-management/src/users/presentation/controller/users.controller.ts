@@ -2,9 +2,9 @@ import { Controller, Inject } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { UsersService } from '../../users.service';
 import { USERS_PATTERNS } from '@app/shared/user-management/users/users.patterns';
-import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
 import { UserDataSource } from '../../data/data-source/users.data-source';
+import { CreateUserDto } from '@app/shared/user-management/users/dto/create-user.dto';
 
 @Controller()
 export class UsersController {
