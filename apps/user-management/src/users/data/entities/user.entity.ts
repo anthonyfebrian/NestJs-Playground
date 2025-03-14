@@ -1,8 +1,8 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { RoleEntity } from "../../roles/data/entities/role.entity";
+import { RoleEntity } from "../../../roles/data/entities/role.entity";
 
 @Entity('users')
-export class User {
+export class UserEntity {
     @PrimaryGeneratedColumn()
     id: number
 

@@ -1,13 +1,18 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Inject } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
-import { UsersService } from './users.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { UsersService } from '../../users.service';
 import { USERS_PATTERNS } from '@app/shared/user-management/users/users.patterns';
+import { CreateUserDto } from '../dto/create-user.dto';
+import { UpdateUserDto } from '../dto/update-user.dto';
+import { UserDataSource } from '../../data/data-source/users.data-source';
 
 @Controller()
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    @Inject('UserDataSource')
+    private readonly dataSource:UserDataSource,
+  ) {}
 
   @MessagePattern(USERS_PATTERNS.CREATE)
   create(@Payload() createUserDto: CreateUserDto) {
@@ -16,12 +21,12 @@ export class UsersController {
 
   @MessagePattern(USERS_PATTERNS.FIND_ALL)
   findAll() {
-    return this.usersService.findAll();
+    return this.dataSource.findAll()
   }
 
   @MessagePattern(USERS_PATTERNS.FIND_ONE)
   findOne(@Payload() id: number) {
-    return this.usersService.findOne(id);
+    return this.dataSource.findOne(id)
   }
 
   @MessagePattern(USERS_PATTERNS.UPDATE)

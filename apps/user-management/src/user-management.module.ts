@@ -6,7 +6,7 @@ import { RolesModule } from './roles/roles.module';
 import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RoleEntity } from './roles/data/entities/role.entity';
-import { User } from './users/entities/user.entity';
+import { UserEntity } from './users/data/entities/user.entity';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({
@@ -22,7 +22,7 @@ import { ConfigModule } from '@nestjs/config';
       username: `${process.env.USER_MANAGEMENT_USERNAME}`,
       password: `${process.env.USER_MANAGEMENT_PASSWORD}`,
       database: `${process.env.USER_MANAGEMENT_DATABASE}`,
-      entities: [User, RoleEntity],
+      entities: [UserEntity, RoleEntity],
       synchronize: true,
     })
   ],
