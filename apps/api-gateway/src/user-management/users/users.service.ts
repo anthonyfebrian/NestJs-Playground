@@ -1,3 +1,4 @@
+import { CreateUserDto } from '@app/shared/user-management/users/dto/create-user.dto';
 import { USERS_PATTERNS } from '@app/shared/user-management/users/users.patterns';
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
@@ -15,5 +16,9 @@ export class UsersService {
 
     findOne(id: number) {
         return this.client.send(USERS_PATTERNS.FIND_ONE, id)
+    }
+
+    create(dto: CreateUserDto) {
+        return this.client.send(USERS_PATTERNS.CREATE, dto)
     }
 }

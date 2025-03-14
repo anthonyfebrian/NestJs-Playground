@@ -16,6 +16,12 @@ export class UsersController {
 
   @MessagePattern(USERS_PATTERNS.CREATE)
   create(@Payload() createUserDto: CreateUserDto) {
+    return this.dataSource.create(
+      createUserDto.email,
+      createUserDto.password,
+      createUserDto.firstName,
+      createUserDto.lastName,
+    )
     return this.usersService.create(createUserDto);
   }
 

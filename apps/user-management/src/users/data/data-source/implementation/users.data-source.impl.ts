@@ -3,12 +3,27 @@ import { UserEntity } from "../../entities/user.entity";
 import { UserDataSource } from "../users.data-source";
 import { Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
+import * as bcrypt from 'bcrypt';
+import { RoleEntity } from "apps/user-management/src/roles/data/entities/role.entity";
 
 @Injectable()
 export class UserDataSourceImpl implements UserDataSource {
     constructor(
         @InjectRepository(UserEntity) private readonly repository: Repository<UserEntity>,
     ) { }
+
+
+    async create(email: string, password: string, firstName: string, lastName: string): Promise<UserEntity> {
+        const hashedPassword = await bcrypt.hash(password, 10)
+        const user = new UserEntity()
+        user.email = email
+        user.password = hashedPassword
+        user.firstName = firstName
+        user.lastName = lastName
+        user.role = { id: 2 } as RoleEntity
+
+        return this.repository.save(user)
+    }
     findAll(): Promise<UserEntity[]> {
         return this.repository.find()
     }

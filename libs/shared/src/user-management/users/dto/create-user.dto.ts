@@ -11,11 +11,9 @@ export class CreateUserDto {
 
 
     @IsNotEmpty()
-    @Expose({ name: "first_name" })
     @Transform(({ value }) => value.trim())
     public firstName: string
 
-    @Expose({ name: "last_name" })
     @IsNotEmpty()
     public lastName: string
 }
