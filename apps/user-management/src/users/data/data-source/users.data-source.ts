@@ -9,4 +9,5 @@ export interface UserDataSource {
     ): Promise<UserEntity>
     findAll(): Promise<UserEntity[]>
     findOne(id: number): Promise<UserEntity>
+    findByEmail(email: string): Promise<UserEntity | null>
 }

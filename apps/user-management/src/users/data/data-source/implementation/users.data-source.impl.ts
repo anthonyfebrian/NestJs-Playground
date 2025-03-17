@@ -11,10 +11,10 @@ export class UserDataSourceImpl implements UserDataSource {
     constructor(
         @InjectRepository(UserEntity) private readonly repository: Repository<UserEntity>,
     ) { }
-
-
+    
     async create(email: string, password: string, firstName: string, lastName: string): Promise<UserEntity> {
-        const hashedPassword = await bcrypt.hash(password, 10)
+        const saltRounds = 10
+        const hashedPassword = await bcrypt.hash(password, saltRounds)
         const user = new UserEntity()
         user.email = email
         user.password = hashedPassword
@@ -34,5 +34,11 @@ export class UserDataSourceImpl implements UserDataSource {
             throw new NotFoundException('User not found')
         }
         return user
+    }
+
+    findByEmail(email: string): Promise<UserEntity | null> {
+        return this.repository.findOneBy({
+            email: email,
+        })
     }
 }

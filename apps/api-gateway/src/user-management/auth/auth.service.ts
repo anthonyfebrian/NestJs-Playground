@@ -11,6 +11,6 @@ export class AuthService {
   ) { }
 
   login(loginDto: LoginDto) {
-    return this.client.send(AUTH_PATTERNS.LOGIN, { loginDto })
+    return this.client.send(AUTH_PATTERNS.LOGIN, loginDto)
   }
 }

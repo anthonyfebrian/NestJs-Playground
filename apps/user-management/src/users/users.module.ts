@@ -7,6 +7,12 @@ import { UserDataSourceImpl } from './data/data-source/implementation/users.data
 
 @Module({
   imports: [TypeOrmModule.forFeature([UserEntity])],
+  exports: [
+    {
+      provide: 'UserDataSource',
+      useClass: UserDataSourceImpl,
+    }
+  ],
   controllers: [UsersController],
   providers: [
     UsersService,
