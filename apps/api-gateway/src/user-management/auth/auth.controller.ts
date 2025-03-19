@@ -8,7 +8,6 @@ import { UsersService } from '../users/users.service';
 export class AuthController {
   constructor(
     private readonly authService: AuthService,
-    private readonly userService: UsersService,
   ) { }
 
   @Post('login')
@@ -22,6 +21,6 @@ export class AuthController {
     console.log('tokenPayload', request.tokenPayload)
     const tokenPayload = request.tokenPayload
     const id = tokenPayload.id
-    return this.userService.findOne(id)
+    return tokenPayload
   }
 }
