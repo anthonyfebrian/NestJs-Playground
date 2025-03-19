@@ -4,14 +4,17 @@ import { UserDataSource } from "apps/user-management/src/users/data/data-source/
 import { UserEntity } from "apps/user-management/src/users/data/entities/user.entity";
 import * as bcrypt from 'bcrypt';
 import { AuthDataSource } from "../auth.data-source";
+import { JwtService } from "@nestjs/jwt";
+import { LoginEntity } from "../../entity/login.entity";
 
 @Injectable()
 export class AuthDataSourceImpl implements AuthDataSource {
     constructor(
-        @Inject('UserDataSource') private readonly userDataSource: UserDataSource
+        @Inject('UserDataSource') private readonly userDataSource: UserDataSource,
+        @Inject() private readonly jwtService:JwtService
     ) { }
     
-    async login(email: string, password: string): Promise<UserEntity> {
+    async login(email: string, password: string): Promise<LoginEntity> {
         console.log(`${email} : ${password}`)
         const user = await this.userDataSource.findByEmail(email)
         if (!user) {
@@ -26,6 +29,19 @@ export class AuthDataSourceImpl implements AuthDataSource {
             throw new RpcUnauthorizedException("Email atau password salah")
         }
 
-        return user
+        const token = await this.generateToken(user)
+        console.log('token : ' + token)
+
+        return new LoginEntity(user, token)
+    }
+
+    async generateToken(user:UserEntity): Promise<string> {
+        const tokenPayload = {
+            sub: user.id,
+            email: user.email,
+        }
+
+        const accessToken = await this.jwtService.signAsync(tokenPayload)
+        return accessToken
     }
 }
