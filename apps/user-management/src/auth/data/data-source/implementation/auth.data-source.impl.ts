@@ -37,7 +37,7 @@ export class AuthDataSourceImpl implements AuthDataSource {
 
     async generateToken(user:UserEntity): Promise<string> {
         const tokenPayload = {
-            sub: user.id,
+            id: user.id,
             email: user.email,
         }
 

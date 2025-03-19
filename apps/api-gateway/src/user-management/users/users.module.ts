@@ -8,6 +8,7 @@ import { ClientModule } from '../shared/client/client.module';
     ClientModule,
   ],
   controllers: [UsersController],
-  providers: [UsersService]
+  providers: [UsersService],
+  exports:[UsersService],
 })
 export class UsersModule { }
