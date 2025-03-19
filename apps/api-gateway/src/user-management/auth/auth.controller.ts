@@ -7,6 +7,7 @@ import { UsersService } from '../users/users.service';
 @Controller('auth')
 export class AuthController {
   constructor(
+    private readonly userService:UsersService,
     private readonly authService: AuthService,
   ) { }
 
@@ -21,6 +22,6 @@ export class AuthController {
     console.log('tokenPayload', request.tokenPayload)
     const tokenPayload = request.tokenPayload
     const id = tokenPayload.id
-    return tokenPayload
+    return this.userService.findOne(id)
   }
 }

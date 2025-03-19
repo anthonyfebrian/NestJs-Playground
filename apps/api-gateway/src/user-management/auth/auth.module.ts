@@ -1,13 +1,15 @@
 import { Module } from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { AuthController } from './auth.controller';
-import { ClientModule } from '../shared/client/client.module';
-import { ConfigModule } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
+import { ClientModule } from '../shared/client/client.module';
+import { UsersModule } from '../users/users.module';
+import { AuthController } from './auth.controller';
+import { AuthService } from './auth.service';
+
 
 @Module({
   imports: [
     ClientModule,
+    UsersModule,
     JwtModule.register(
           {
             global: true,
