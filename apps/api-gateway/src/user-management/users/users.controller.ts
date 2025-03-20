@@ -1,7 +1,7 @@
-import { Body, Controller, Get, Request, Param, Post, UseGuards } from '@nestjs/common';
-import { UsersService } from './users.service';
 import { CreateUserDto } from '@app/shared/user-management/users/dto/create-user.dto';
-import { AuthGuard } from '../auth/guards/auth.guards';
+import { Body, Controller, Get, Param, Post, Request, UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { UsersService } from './users.service';
 
 
 @Controller('users')
@@ -26,11 +26,10 @@ export class UsersController {
         return this.service.create(createUserDto)
     }
 
-    @UseGuards(AuthGuard)
+    @UseGuards(JwtAuthGuard)
     @Get("profile/me")
     getProfile(@Request() request) {
-        console.log('tokenPayload', request.tokenPayload)
-        const tokenPayload = request.tokenPayload
+        const tokenPayload = request.user
         const id = tokenPayload.id
         return this.service.findOne(id)
     }

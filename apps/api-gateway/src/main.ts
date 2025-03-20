@@ -6,7 +6,7 @@ import { ValidationExceptionFactory } from '@app/shared/user-management/utils/va
 
 async function bootstrap() {
   const app = await NestFactory.create(ApiGatewayModule);
-  app.useLogger(app.get(Logger));
+  // app.useLogger(app.get(Logger));
   app.enableVersioning(
     {
       type: VersioningType.URI,
