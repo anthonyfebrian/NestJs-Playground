@@ -6,6 +6,7 @@ import * as bcrypt from 'bcrypt';
 import { AuthDataSource } from "../auth.data-source";
 import { JwtService } from "@nestjs/jwt";
 import { LoginEntity } from "../../entity/login.entity";
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class AuthDataSourceImpl implements AuthDataSource {
@@ -39,6 +40,7 @@ export class AuthDataSourceImpl implements AuthDataSource {
         const tokenPayload = {
             id: user.id,
             email: user.email,
+            tokenId: uuidv4()
         }
 
         const accessToken = await this.jwtService.signAsync(tokenPayload)
