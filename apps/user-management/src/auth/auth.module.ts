@@ -4,6 +4,9 @@ import { AuthDataSourceImpl } from './data/data-source/implementation/auth.data-
 import { UsersModule } from '../users/users.module';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule } from '@nestjs/config';
+import Redis from 'ioredis';
+import { hostname } from 'os';
+import { BlacklistTokenDataSourceImpl } from './data/data-source/implementation/blacklist-token.data-source.impl';
 
 @Module({
   imports:[
@@ -22,8 +25,22 @@ import { ConfigModule } from '@nestjs/config';
   controllers: [AuthController],
   providers: [
     {
+      provide:"REDIS_CLIENT",
+      useFactory: () => { return new Redis(
+        {
+          host: process.env.USER_MANAGEMENT_REDIS_HOST || '127.0.0.1',
+          port: parseInt(process.env.USER_MANAGEMENT_REDIS_PORT || '6379'),
+          password: process.env.USER_MANAGEMENT_REDIS_PASSWORD || undefined,
+        }
+      ) }
+    },
+    {
       provide: 'AuthDataSource',
       useClass: AuthDataSourceImpl,
+    },
+    {
+      provide: 'BlacklistTokenDataSource',
+      useClass: BlacklistTokenDataSourceImpl
     }
   ]
 })
